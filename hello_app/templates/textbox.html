@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Enter Names and Ratings</h2>
+
+    <form method="POST">
+
+        {% for i in range(1, count + 1) %}
+        <b>Person {{ i }}</b>
+        <br>
+        <label>Name:</label>
+        <input type="text" name="name{{ i }}" value="{{ results[i-1].name if results }}">
+
+        <label>Ratings:</label>
+        <input type="number" name="ratings{{ i }}" min="1" max="100"
+            value="{{ results[i-1].rating if results }}"><br><br>
+
+        {% endfor %}
+
+        <button type="submit">Submit</button> <button type="button" onclick="clearForm()">Clear All</button>
+        <br><br>
+    </form>
+
+    {% if logic_output %}
+    <b>Logic Results</b>
+    {% if logic_output.message %}
+    <p>{{ logic_output.message }}</p>
+    {% else %}
+    <p><strong>Average Rating:</strong> {{ logic_output.average }}</p>
+
+    <p><strong>Top Person:</strong>
+        {{ logic_output.top.name }} ({{ logic_output.top.rating }})
+    </p>
+    <table>
+        <tr>
+            <th><b>Sorted by Rating</b></th>
+            <th><b>Sorted by Rating Low</b></th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    {% for p in logic_output.sorted %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for p in logic_output.sorted_low %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    {% endif %}
+    {% endif %}
+
+    {% if results %}
+    <b>Submitted Data</b>
+    {% for person in results %}
+    {% if person.name and person.rating %}
+    <p>Name: {{ person.name }} — Rating: {{ person.rating }}</p>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+
+    <script>
+        function clearForm() {
+            document.querySelectorAll('input[type="text"], input[type="number"]').forEach(el => {
+                el.value = "";
+            });
+        }
+    </script>
+
+</body>
+
+</html>
