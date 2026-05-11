@@ -36,6 +36,10 @@
         <tr>
             <th><b>Sorted by Rating</b></th>
             <th><b>Sorted by Rating Low</b></th>
+            <th><b>Team 1</b></th>
+            <th><b>Team 2</b></th>
+            <th><b>Team 1 Snake</b></th>
+            <th><b>Team 2 Snake</b></th>
         </tr>
         <tr>
             <td>
@@ -50,6 +54,38 @@
                     {% for p in logic_output.sorted_low %}
                     <li>{{ p.name }} — {{ p.rating }}</li>
                     {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for p in logic_output.team1 %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                    <b>Average: {{ logic_output.team1_avg }}</b>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for p in logic_output.team2 %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                    <b>Average: {{ logic_output.team2_avg }}</b>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for p in logic_output.team1_snake %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                    <b>Average: {{ logic_output.team1_snake_avg }}</b>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for p in logic_output.team2_snake %}
+                    <li>{{ p.name }} — {{ p.rating }}</li>
+                    {% endfor %}
+                    <b>Average: {{ logic_output.team2_snake_avg }}</b>
                 </ul>
             </td>
         </tr>
